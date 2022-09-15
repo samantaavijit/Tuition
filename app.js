@@ -1,5 +1,6 @@
 const express = require("express");
 const route = require("./routes/route");
+const conn = require("./db/connection");
 
 const app = express();
 const port = 5050;

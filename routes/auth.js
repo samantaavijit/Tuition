@@ -107,4 +107,6 @@ Router.post(
   }
 );
 
+// TODO: get all users METHOD - GET, API NAME -> "/get-all-users", QUERy -> User.find()
+
 module.exports = Router;

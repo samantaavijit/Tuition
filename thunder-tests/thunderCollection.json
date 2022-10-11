@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "9ed64220-d1f6-4c37-9afc-3e6c687ec219",
+    "colName": "Tuition",
+    "created": "2022-10-11T02:19:47.661Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "82070024-c6ee-4f56-bcf3-bc46e2b1d2b8",
+        "name": "auth",
+        "containerId": "",
+        "created": "2022-10-11T02:20:24.397Z",
+        "sortNum": 10000
+      }
+    ]
+  }
+]

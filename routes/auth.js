@@ -3,9 +3,49 @@ let Router = Express.Router();
 let User = require("../models/user");
 const { check, validationResult } = require("express-validator");
 
-Router.post("/login", async (req, res) => {
-  res.send("Welcome to login");
-});
+Router.post(
+  "/login",
+  [
+    check("email", "Enter valid email").isEmail().isLowercase(),
+    check("password", "Password must be 6 or more characters").isLength({
+      min: 6,
+    }),
+  ],
+  async (req, res) => {
+    const error = validationResult(req);
+
+    if (!error.isEmpty()) {
+      return res.status(400).json({ error: error.array() });
+    }
+
+    let { email, password } = req.body;
+
+    try {
+      let findUser = await User.findOne({ email });
+
+      // NOT FOUND
+      if (!findUser) {
+        return res.status(400).json({ error: "User Not Found" });
+      }
+
+      // SUCCESS
+      if (password === findUser.password) {
+        delete findUser["password"];
+
+        return res.status(200).json({
+          success: true,
+          message: "User successfully login",
+          user_details: findUser,
+        });
+      }
+      // NOT MATCH PASSWORD
+      return res.status(400).json({ error: "Password Not Match" });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
 
 Router.post(
   "/registration",
